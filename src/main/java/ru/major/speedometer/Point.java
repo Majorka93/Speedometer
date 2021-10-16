@@ -2,10 +2,6 @@ package ru.major.speedometer;
 
 public class Point {
 
-    //у класса должны быть поля широта и долгота
-    //должен быть метод который валидирует диапазон
-    //должен быть конструктор который принимает строку вида "12.50,13.56", парсит ее и заполняет поля
-    //должны быть геттеры которые возвращают широту и долготу
     private double lat;
     private double lng;
 
@@ -17,8 +13,29 @@ public class Point {
         return lng;
     }
 
-    public Point(String optionName) {
+    public void setLat(double lat) {
         this.lat = lat;
+    }
+
+    public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public Point(String optionName) {
+
+        String[] points = optionName.split(",");
+        this.lat = Double.parseDouble(points[0]);
+        this.lng = Double.parseDouble(points[1]);
+
+    }
+
+    public boolean isInRange() {
+
+        if (-90 <= lat && lat <= 90 && -180 <= lng && lng <= 180) {
+            return true;
+
+        }
+
+        return false;
     }
 }
